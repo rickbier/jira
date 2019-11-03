@@ -1,0 +1,12 @@
+#Cloudbuild.yaml
+steps:
+- name: 'docker/compose:1.19.0'
+  args: ['up', '-d']
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'commit', 'jira-srv', 'gcr.io/jira-sandbox/jira-srv' ]
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'commit', 'mysql-jira', 'gcr.io/jira-sandbox/mysql-jira' ]
+images:
+- 'gcr.io/jira-sandbox/jira-srv'
+- 'gcr.io/jira-sandbox/mysql-jira'
+
